@@ -16,12 +16,12 @@ extension UITextView: ValidatableInterfaceElement {
     
     open func validateOnInputChange(enabled: Bool) {
         switch enabled {
-		case true: NotificationCenter.default.addObserver(self, selector: #selector(UITextView.validateInput(_:)), name: UITextView.textDidChangeNotification, object: self)
+		case true: NotificationCenter.default.addObserver(self, selector: #selector(validate), name: UITextView.textDidChangeNotification, object: self)
 		case false: NotificationCenter.default.removeObserver(self, name: UITextView.textDidChangeNotification, object: self)
         }
     }
     
-    @objc internal func validateInput(_ sender: Notification) {
+    @objc internal func validate(_ sender: Notification) {
         validate()
     }
      public func validate<R: ValidationRule>(rule r: R) -> ValidationResult where R.InputType == InputType {
